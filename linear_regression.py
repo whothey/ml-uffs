@@ -22,15 +22,16 @@ X = np.insert(X, 0, 1, axis=1)
 
 theta = np.array([[0.2, 0.2]])
 
-print(X)
-
 assert X.shape == (97, 2)
 assert y.shape == (97, 1)
 assert theta.shape == (1, 2)
 
-for _ in range(10000):
+for i in range(1000):
     error = X.dot(theta.T) - y
-    dvt = error.T.dot(X) / (2*X.shape[0])
+    dvt = error.T.dot(X) / (X.shape[0])
     theta = theta - alpha * dvt
-    print(J(X, y, theta))
 
+    print("{it}: {cost}".format(it=i, cost=J(X, y, theta)))
+
+
+print(theta)
